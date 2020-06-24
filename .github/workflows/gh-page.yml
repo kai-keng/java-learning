@@ -1,22 +1,38 @@
-name: github pages
+name: github-pages
 
 on:
   push:
     branches:
-      - master
-        
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@master
+    - master
 
-    - name: Build and Deploy
-      uses: grasilife/github-pages-deploy-action@master
-      env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BASE_BRANCH: master # The branch the action should deploy from.
-        BRANCH: gh-pages # The branch the action should deploy to.
-        FOLDER: docs/.vuepress/dist # The folder the action should deploy.
-        BUILD_SCRIPT: npm install && npm run docs:build # The build script the action should run prior to deploying.
+jobs:
+  build-deploy:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Setup Node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '12'
+
+    - name: Cache dependencies
+      uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build
+      run: npm run build
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: docs/.vuepress/dist
+        publish_branch: gh-pages
