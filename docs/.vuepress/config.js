@@ -9,7 +9,8 @@ module.exports = {
         collapsable: true,
         path: '/spring-boot/',
         children: [
-          './spring-boot/exception'
+          './spring-boot/exception',
+          './spring-boot/configuration'
         ]
       },
       {
