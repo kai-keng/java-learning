@@ -10,7 +10,8 @@ module.exports = {
         path: '/spring-boot/',
         children: [
           './spring-boot/exception',
-          './spring-boot/configuration'
+          './spring-boot/configuration',
+          './spring-boot/mybatis-druid'
         ]
       },
       {
