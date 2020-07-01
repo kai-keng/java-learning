@@ -26,7 +26,8 @@ module.exports = {
         collapsable: true,
         path: '/design-pattern/',
         children: [
-          './design-pattern/singleton'
+          './design-pattern/singleton',
+          './design-pattern/templateMethod'
         ]
       },
       {
