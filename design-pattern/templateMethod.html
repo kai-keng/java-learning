@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>行为型-模板方法模式 | Java</title>
+    <meta name="generator" content="VuePress 1.5.2">
+    
+    <meta name="description" content="Just record my learning process">
+    <link rel="preload" href="/java-learning/assets/css/0.styles.dcc29016.css" as="style"><link rel="preload" href="/java-learning/assets/js/app.03d0b853.js" as="script"><link rel="preload" href="/java-learning/assets/js/2.eda7ecbc.js" as="script"><link rel="preload" href="/java-learning/assets/js/8.87108e76.js" as="script"><link rel="prefetch" href="/java-learning/assets/js/10.ef81aace.js"><link rel="prefetch" href="/java-learning/assets/js/11.09c0b0ab.js"><link rel="prefetch" href="/java-learning/assets/js/12.d3bc74db.js"><link rel="prefetch" href="/java-learning/assets/js/13.3966d520.js"><link rel="prefetch" href="/java-learning/assets/js/14.331c5175.js"><link rel="prefetch" href="/java-learning/assets/js/3.804d668d.js"><link rel="prefetch" href="/java-learning/assets/js/4.7d5f245c.js"><link rel="prefetch" href="/java-learning/assets/js/5.01450b09.js"><link rel="prefetch" href="/java-learning/assets/js/6.65d3e572.js"><link rel="prefetch" href="/java-learning/assets/js/7.359de2dc.js"><link rel="prefetch" href="/java-learning/assets/js/9.dc72a1ce.js">
+    <link rel="stylesheet" href="/java-learning/assets/css/0.styles.dcc29016.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/java-learning/" class="home-link router-link-active"><!----> <span class="site-name">Java</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><a href="/java-learning/spring-boot/" class="sidebar-heading clickable"><span>Spring Boot</span> <span class="arrow right"></span></a> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><a href="/java-learning/spring-cloud/" class="sidebar-heading clickable"><span>Spring Cloud</span> <span class="arrow right"></span></a> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><a href="/java-learning/design-pattern/" class="sidebar-heading clickable router-link-active open"><span>设计模式</span> <span class="arrow down"></span></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/java-learning/design-pattern/singleton.html" class="sidebar-link">创建型-单例模式</a></li><li><a href="/java-learning/design-pattern/templateMethod.html" aria-current="page" class="active sidebar-link">行为型-模板方法模式</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/java-learning/design-pattern/templateMethod.html#定义" class="sidebar-link">定义</a></li><li class="sidebar-sub-header"><a href="/java-learning/design-pattern/templateMethod.html#理解" class="sidebar-link">理解</a></li><li class="sidebar-sub-header"><a href="/java-learning/design-pattern/templateMethod.html#示例" class="sidebar-link">示例</a></li><li class="sidebar-sub-header"><a href="/java-learning/design-pattern/templateMethod.html#总结" class="sidebar-link">总结</a></li></ul></li></ul></section></li><li><a href="/java-learning/materials/" class="sidebar-link">相关资料</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="行为型-模板方法模式"><a href="#行为型-模板方法模式" class="header-anchor">#</a> 行为型-模板方法模式</h1> <h2 id="定义"><a href="#定义" class="header-anchor">#</a> 定义</h2> <p>定义了一个算法的骨架，而将一些步骤延迟到子类中，模版方法使得子类可以在不改变算法结构的情况下，重新定义算法的步骤。</p> <h2 id="理解"><a href="#理解" class="header-anchor">#</a> 理解</h2> <p>将一个大的行为中的一些既定相同的步骤统一在父类中定义好，不同的部分在父类中定义抽象方法，交由子类自己去做不同的实现。</p> <h2 id="示例"><a href="#示例" class="header-anchor">#</a> 示例</h2> <p>比如上班这件事情，上下班都需要打卡，上班打卡是个既定流程，然后中间是工作，每个人工作都不同，下又需要打卡，这样就可以应用模板方法模式，制定一个套路。即上下班打卡这个套路，然后交给每个人自己去决定自己工作干什么。</p> <ol><li>定义抽象父类，Work类</li></ol> <div class="language-JAVA extra-class"><pre class="language-java"><code><span class="token keyword">static</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Work</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">Work</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">startWorkDay</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">morningSignIn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">doWork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">afternoonSignIn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">morningSignIn</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">+</span> <span class="token string">&quot;上班打卡&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">doWork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">afternoonSignIn</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">+</span> <span class="token string">&quot;下班打卡&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="2"><li>定义不同的子类</li></ol> <div class="language-JAVA extra-class"><pre class="language-java"><code><span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">ProgramEmployeeWork</span> <span class="token keyword">extends</span> <span class="token class-name">Work</span><span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">ProgramEmployeeWork</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">doWork</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token keyword">super</span><span class="token punctuation">.</span>name <span class="token operator">+</span> <span class="token string">&quot;拼命码代码&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">HREmployeeWork</span> <span class="token keyword">extends</span> <span class="token class-name">Work</span><span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">HREmployeeWork</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">doWork</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token keyword">super</span><span class="token punctuation">.</span>name <span class="token operator">+</span> <span class="token string">&quot;拼命招人&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="3"><li>创建子类实例，开始一天工作</li></ol> <div class="language- extra-class"><pre class="language-text"><code>public static void main(String[] args) {
+    Work programWork = new ProgramEmployeeWork(&quot;小张&quot;);
+    programWork.startWorkDay();
+    Work hrWork = new HREmployeeWork(&quot;小王&quot;);
+    hrWork.startWorkDay();
+}
+</code></pre></div><p>输出：</p> <div class="language- extra-class"><pre class="language-text"><code>小张上班打卡
+小张拼命码代码
+小张下班打卡
+小王上班打卡
+小王拼命招人
+小王下班打卡
+</code></pre></div><blockquote><p>模板方法模式中还可以设置钩子，用于应对不同的情况。比如我想记录程序员上下班打卡时间，来发放餐饮补助，但是人事就不需要，实现如下：</p></blockquote> <ol><li>在父类Work中添加钩子方法</li></ol> <div class="language-JAVA extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isPrintSignTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="2"><li>在原有方法嵌入钩子</li></ol> <div class="language-JAVA extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">morningSignIn</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isPrintSignTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token class-name">LocalDateTime</span><span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">&quot;---&gt;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">+</span> <span class="token string">&quot;上班打卡&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">afternoonSignIn</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isPrintSignTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token class-name">LocalDateTime</span><span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">&quot;---&gt;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">+</span> <span class="token string">&quot;下班打卡&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="3"><li>程序员子类重写钩子</li></ol> <div class="language-JAVA extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isPrintSignTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>输出：</p> <div class="language- extra-class"><pre class="language-text"><code>2020-07-01T16:39:22.976242---&gt;小张上班打卡
+小张拼命码代码
+2020-07-01T16:39:22.977156---&gt;小张下班打卡
+小王上班打卡
+小王拼命招人
+小王下班打卡
+</code></pre></div><h2 id="总结"><a href="#总结" class="header-anchor">#</a> 总结</h2> <p>在我们代码中，如果有需要定义既定流程，让不同实现都按照流程走的时候，则可以使用模板方法模式。比如做爬虫的时候，爬取不同的网站都需要不同的规则，处理结果也不一样，但是大致的流程都相同。定义规则，爬取数据，处理数据，这个时候可以定义模板方法，确认爬虫流程，不同网站爬取都依照这个父类模板来实现自己，保证流程相同，让代码更加简洁，清晰易读。</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/java-learning/design-pattern/singleton.html" class="prev">
+        创建型-单例模式
+      </a></span> <span class="next"><a href="/java-learning/materials/">
+        相关资料
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/java-learning/assets/js/app.03d0b853.js" defer></script><script src="/java-learning/assets/js/2.eda7ecbc.js" defer></script><script src="/java-learning/assets/js/8.87108e76.js" defer></script>
+  </body>
+</html>
