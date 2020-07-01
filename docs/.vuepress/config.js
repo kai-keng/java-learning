@@ -1,7 +1,7 @@
 module.exports = {
   title: 'Java',
   description: 'Just record my learning process',
-  base: '/docs-spring/',
+  base: '/java-learning/',
   themeConfig: {
     sidebar: [
       {
