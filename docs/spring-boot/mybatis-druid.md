@@ -241,3 +241,5 @@ Druid管理控台图
 
 ## 参考文章
 1. [Spring Boot中使用MyBatis](https://mrbird.cc/Spring-Boot%20Mybatis.html)
+2. [Druid官方问题汇总，值得参考](https://github.com/alibaba/druid/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98)
+3. [Mybaits文档](https://mybatis.org/mybatis-3/zh/java-api.html)

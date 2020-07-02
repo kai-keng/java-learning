@@ -28,7 +28,8 @@ module.exports = {
         path: '/design-pattern/',
         children: [
           './design-pattern/singleton',
-          './design-pattern/templateMethod'
+          './design-pattern/templateMethod',
+          './design-pattern/state'
         ]
       },
       {
