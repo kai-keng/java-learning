@@ -16,7 +16,7 @@
 
 ## 实例
 Java中多线程拥有很多不同的状态，线程可以在不同的状态之间转换，且不同的状态都有不同的行为。使用状态模式模拟Java多线程状态类的切换。
-![线程状态转换图](./images/java-thread-state.gif)
+![线程状态转换图](../public/images/design-pattern/java-thread-state.gif)
 
 **实现抽象状态类**
 ```JAVA

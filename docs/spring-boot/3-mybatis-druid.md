@@ -199,15 +199,15 @@ public class TestController {
 ```
 
 项目结构图
-![项目结构图](./images/mybatis-druid-project-structure.jpg)
+![项目结构图](../public/images/spring-boot/mybatis-druid-project-structure.jpg)
 
-启动项目访问：[http://localhost:8080/querystudent?sno=001](http://localhost:8080/web/querystudent?sno=001)
+启动项目访问：[http://localhost:8080/querystudent?sno=001](http://localhost:8080/querystudent?sno=001)
 
 查询结果图
-![项目结构图](./images/mybatis-sarch-result.jpg)
+![项目结构图](../public/images/spring-boot/mybatis-sarch-result.jpg)
 
 Druid管理控台图
-![项目结构图](./images/druid-control-panel.jpg)
+![项目结构图](../public/images/spring-boot/druid-control-panel.jpg)
 
 ## 问题总结
 在实际操作的时候碰到了两个问题，记录下来，大家可以避免踩坑。
@@ -215,7 +215,7 @@ Druid管理控台图
 1. **Maven数据源配置错误，导致druid-spring-boot-starter导入不进来：** 开始的时候我Maven数据源配的不对，虽然也是阿里的，但是Druid Stater就是import不进来，在查询并且重新修改了*seetings.xml*以后，总算可以正常import依赖了，步骤如下：
 
 打开*seetings.xml*文件
-![seetings.xml文件图](./images/open-maven-settings.jpg)
+![seetings.xml文件图](../public/images/spring-boot/open-maven-settings.jpg)
 
 修改文件内容
 ```XML

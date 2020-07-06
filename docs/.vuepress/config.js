@@ -3,15 +3,20 @@ module.exports = {
   description: 'Just record my learning process',
   base: '/java-learning/',
   themeConfig: {
+    nav: [
+      { text: '主站', link: 'https://kai-keng.github.io/', target:'', rel:'' },
+    ],
     sidebar: [
       {
         title: 'Spring Boot',
         collapsable: true,
         path: '/spring-boot/',
         children: [
-          './spring-boot/exception',
-          './spring-boot/configuration',
-          './spring-boot/mybatis-druid'
+          './spring-boot/1-exception',
+          './spring-boot/2-configuration',
+          './spring-boot/3-mybatis-druid',
+          './spring-boot/4-spring-multi-datasource',
+          './spring-boot/5-operation-log-aop'
         ]
       },
       {
