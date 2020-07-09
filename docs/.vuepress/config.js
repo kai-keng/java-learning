@@ -12,11 +12,13 @@ module.exports = {
         collapsable: true,
         path: '/spring-boot/',
         children: [
+          './spring-boot/0-idea-configuration',
           './spring-boot/1-exception',
           './spring-boot/2-configuration',
           './spring-boot/3-mybatis-druid',
           './spring-boot/4-spring-multi-datasource',
-          './spring-boot/5-operation-log-aop'
+          './spring-boot/5-operation-log-aop',
+          './spring-boot/6-redis-cache'
         ]
       },
       {

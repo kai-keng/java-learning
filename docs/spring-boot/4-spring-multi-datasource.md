@@ -189,6 +189,8 @@ public class StudentServiceImpl implements StudentService {
 配置多数据源还是比较简单的，关键点在于配置类能够正确读取到数据库连接配置，然后正确对不同数据源实现不同的配置类即可。
 
 ## END
-**Author**: Borg
+**作者**: Borg
 
-**Time**: Mon Jul 06 2020 18:41:07 GMT+0800 (中国标准时间)
+**创建时间**: 2020-07-06 18:41 周一
+
+**最后更新时间**: 2020-07-08 10:11 周三
