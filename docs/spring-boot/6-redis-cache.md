@@ -44,7 +44,7 @@ srping:
 3. 添加Redis配置类，基于Spring Boot 2.X
 ```JAVA
 @Configuration
-@EnableCaching // 要开启必须要加上`@EnableCaching`注解，不添加的话不会开启缓存
+@EnableCaching // 要开启必须要加上`@EnableCaching`注解，不添加的话不会开启缓存，也可以添加在启动类上
 public class RedisConfig extends CachingConfigurerSupport {
 
     private static final String SYMBOL_COLON = ":";
@@ -120,15 +120,15 @@ public interface StudentService {
 * `@CacheConfig`用于配置类中其他缓存配置的一些公共配置，比如类的默认缓存名称。也可以不使用改注解，在其他注解上自己单独配置。
 * `@Cacheable`用于表示调用该注解标识的方法时，会先去查询缓存，如果有则直接返回缓存，没有的话则调用方法，缓存方法的返回结果，可配置的主要参数有：
   
-  **value、cacheNames**：这两个参数意思等同，就是配置指定的缓存名称
+  **value、cacheNames**：这两个参数意思等同，就是配置指定的缓存名称。
   
   **key**：用于配置缓存的key值，实际最终的key值会是*[缓存名称]::[key]*。key配置的规则使用的是SpEL表达式来表示，比如`@Cacheable(key = "#p0")`，`#p0`的意思是去第一个参数。
   
-  **condition**：配置是否缓存的条件，比如：`@Cacheable(key = "#p0", condition = "#p0.length() < 3")`.
+  **condition**：配置是否缓存的条件，比如：`@Cacheable(key = "#p0", condition = "#p0.length() < 3")`。
   
   **unless**：这个不同于condition，它的调用时机是在方法调用完以后，可以获取到方法的结果来进行判断，比如：`@Cacheable(key = "#sno", unless = "#result == null")`,表示的是只有当结果不为null的时候才会被缓存，和我想的也不一样，我本来认为这样表示的为null的时候才缓存，实际测试结果刚好相反。
   
-  **keyGenerator**：用于指定key生成器，非必需。若需要指定一个自定义的key生成器，我们需要去实现org.springframework.cache.interceptor.KeyGenerator接口，并使用该参数来指定；
+  **keyGenerator**：用于指定key生成器，非必需。若需要指定一个自定义的key生成器，我们需要去实现org.springframework.cache.interceptor.KeyGenerator接口，并使用该参数来指定。
   
   **cacheManager**：用于指定使用哪个缓存管理器，非必需。只有当有多个时才需要使用。
   
@@ -136,7 +136,7 @@ public interface StudentService {
 * `@CachePut`参数与`@Cacheable`都一样，区别在于`@CachePut`标识的方法一定是会被调用的，而且返回的结果会用于更新缓存，使用来更新缓存的。
 * `@CacheEvict`是用来标识需要删除缓存的方法，该注解会删除指定的缓存。它除了上面的参数以外还有2个额外的参数：
   
-  **allEntries**：非必需，默认为false。当为true时，会移除所有数据；
+  **allEntries**：非必需，默认为false。当为true时，会移除所有数据。
   
   **beforeInvocation**：非必需，默认为false，会在调用方法之后移除数据。当为true时，会在调用方法之前移除数据。
 
@@ -228,9 +228,9 @@ Spring整合Redis的关键点在于实现好Redis配置类，在配置类中可�
 2. [Spring Boot Redis](https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html#REDIS)
 3. [参考文章](https://mrbird.cc/Spring-Boot%20cache.html)
 
-## END
+<!-- ## END
 **作者**: Borg
 
 **创建时间**: 2020-07-09 09:19 周四
 
-**最后更新时间**: 2020-07-09 09:19 周四
+**最后更新时间**: 2020-07-09 09:19 周四 -->

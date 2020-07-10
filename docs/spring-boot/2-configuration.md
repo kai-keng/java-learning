@@ -150,9 +150,9 @@ Spring中默认支持不同环境使用不同配置文件，我们可以以*appl
 1. [SpringBoot配置文件——加载顺序](https://www.jianshu.com/p/3c615bd42799)
 2. [Spring Boot一些基础配置](https://mrbird.cc/Spring-Boot%20basic%20config.html)
 
-## END
+<!-- ## END
 **作者**: Borg
 
 **创建时间**: 未记录
 
-**最后更新时间**: 2020-07-08 10:11 周三
+**最后更新时间**: 2020-07-08 10:11 周三 -->

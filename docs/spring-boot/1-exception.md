@@ -121,9 +121,9 @@ public class GlobalExceptionHandler {
 ## 总结
 全局异常处理核心是利用Java提供的`@RestControllerAdvice`标记需要扫描的全局异常处理类，然后使用`@ExceptionHandler`标记具体处理异常的方法，`@ExceptionHandler`可以定义需要捕捉的异常，可以定义单个也可以定义多个。
 
-## END
+<!-- ## END
 **作者**: Borg
 
 **创建时间**: 未记录
 
-**最后更新时间**: 2020-07-08 10:11 周三
+**最后更新时间**: 2020-07-08 10:11 周三 -->
