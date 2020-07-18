@@ -19,7 +19,8 @@ module.exports = {
           './spring-boot/4-spring-multi-datasource',
           './spring-boot/5-operation-log-aop',
           './spring-boot/6-redis-cache',
-          './spring-boot/10-hibernate-validator'
+          './spring-boot/10-hibernate-validator',
+          './spring-boot/11-mybatis-auto',
         ]
       },
       {
