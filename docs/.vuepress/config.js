@@ -21,6 +21,7 @@ module.exports = {
           './spring-boot/6-redis-cache',
           './spring-boot/10-hibernate-validator',
           './spring-boot/11-mybatis-auto',
+          './spring-boot/12-common-result',
         ]
       },
       {
