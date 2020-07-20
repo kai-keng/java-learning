@@ -262,6 +262,9 @@ public class ReportController {
 }
 ```
 
+### 注意
+1. 启动类必须添加上`@MapperScan("com.example.demo.mapper")`，不然会报错Service找不到`tk.mybatis.mapper.common.Mapper`的bean
+
 ## 使用PageHelper简化分页
 
 ### 介绍
