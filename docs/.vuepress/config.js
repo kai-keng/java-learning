@@ -22,6 +22,7 @@ module.exports = {
           './spring-boot/10-hibernate-validator',
           './spring-boot/11-mybatis-auto',
           './spring-boot/12-common-result',
+          './spring-boot/13-knife4j',
         ]
       },
       {

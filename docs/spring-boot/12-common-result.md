@@ -59,7 +59,19 @@ public class ResponseResultInterceptor implements HandlerInterceptor {
 }
 ```
 
-3. 添加响应包装处理类
+3. 添加拦截器配置类，注册拦截器
+```JAVA
+@Configuration
+public class InterceptorConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new ResponseResultInterceptor()).addPathPatterns("/**");
+    }
+}
+```
+
+4. 添加响应包装处理类
 ```JAVA
 @RestControllerAdvice
 public class ResponseResultHandler implements ResponseBodyAdvice<Object> {
