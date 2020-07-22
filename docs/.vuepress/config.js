@@ -40,7 +40,8 @@ module.exports = {
         children: [
           './design-pattern/singleton',
           './design-pattern/templateMethod',
-          './design-pattern/state'
+          './design-pattern/state',
+          './design-pattern/builder',
         ]
       },
       {
