@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>创建型-建造者模式 | Java</title>
+    <meta name="generator" content="VuePress 1.5.2">
+    
+    <meta name="description" content="Just record my learning process">
+    <link rel="preload" href="/java-learning/assets/css/0.styles.dcc29016.css" as="style"><link rel="preload" href="/java-learning/assets/js/app.cecf43fa.js" as="script"><link rel="preload" href="/java-learning/assets/js/2.461ce9dd.js" as="script"><link rel="preload" href="/java-learning/assets/js/8.9beb684b.js" as="script"><link rel="prefetch" href="/java-learning/assets/js/10.09e13436.js"><link rel="prefetch" href="/java-learning/assets/js/11.37c785bb.js"><link rel="prefetch" href="/java-learning/assets/js/12.49d3f61a.js"><link rel="prefetch" href="/java-learning/assets/js/13.a39e9ad4.js"><link rel="prefetch" href="/java-learning/assets/js/14.902f87be.js"><link rel="prefetch" href="/java-learning/assets/js/15.0d56b951.js"><link rel="prefetch" href="/java-learning/assets/js/16.883e14f2.js"><link rel="prefetch" href="/java-learning/assets/js/17.422b76ad.js"><link rel="prefetch" href="/java-learning/assets/js/18.491f2445.js"><link rel="prefetch" href="/java-learning/assets/js/19.e4580115.js"><link rel="prefetch" href="/java-learning/assets/js/20.cc3285e7.js"><link rel="prefetch" href="/java-learning/assets/js/21.1e6a6d46.js"><link rel="prefetch" href="/java-learning/assets/js/22.498cd178.js"><link rel="prefetch" href="/java-learning/assets/js/23.3ce025ab.js"><link rel="prefetch" href="/java-learning/assets/js/24.0b71bdeb.js"><link rel="prefetch" href="/java-learning/assets/js/25.74248ba2.js"><link rel="prefetch" href="/java-learning/assets/js/26.9ce3e0dd.js"><link rel="prefetch" href="/java-learning/assets/js/27.5b062e71.js"><link rel="prefetch" href="/java-learning/assets/js/28.f46b6ee9.js"><link rel="prefetch" href="/java-learning/assets/js/3.69d53058.js"><link rel="prefetch" href="/java-learning/assets/js/4.fcb966ab.js"><link rel="prefetch" href="/java-learning/assets/js/5.2aaccbf2.js"><link rel="prefetch" href="/java-learning/assets/js/6.e3f121e3.js"><link rel="prefetch" href="/java-learning/assets/js/7.3f6172b4.js"><link rel="prefetch" href="/java-learning/assets/js/9.24a0338a.js">
+    <link rel="stylesheet" href="/java-learning/assets/css/0.styles.dcc29016.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/java-learning/" class="home-link router-link-active"><!----> <span class="site-name">Java</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="https://kai-keng.github.io/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  主站
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="https://kai-keng.github.io/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  主站
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><a href="/java-learning/spring-boot/" class="sidebar-heading clickable"><span>Spring Boot</span> <span class="arrow right"></span></a> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><a href="/java-learning/spring-cloud/" class="sidebar-heading clickable"><span>Spring Cloud</span> <span class="arrow right"></span></a> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><a href="/java-learning/design-pattern/" class="sidebar-heading clickable router-link-active open"><span>设计模式</span> <span class="arrow down"></span></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/java-learning/design-pattern/singleton.html" class="sidebar-link">创建型-单例模式</a></li><li><a href="/java-learning/design-pattern/templateMethod.html" class="sidebar-link">行为型-模板方法模式</a></li><li><a href="/java-learning/design-pattern/state.html" class="sidebar-link">行为型-状态模式</a></li><li><a href="/java-learning/design-pattern/builder.html" aria-current="page" class="active sidebar-link">创建型-建造者模式</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/java-learning/design-pattern/builder.html#定义" class="sidebar-link">定义</a></li><li class="sidebar-sub-header"><a href="/java-learning/design-pattern/builder.html#理解" class="sidebar-link">理解</a></li><li class="sidebar-sub-header"><a href="/java-learning/design-pattern/builder.html#优点" class="sidebar-link">优点</a></li><li class="sidebar-sub-header"><a href="/java-learning/design-pattern/builder.html#缺点" class="sidebar-link">缺点</a></li><li class="sidebar-sub-header"><a href="/java-learning/design-pattern/builder.html#示例" class="sidebar-link">示例</a></li><li class="sidebar-sub-header"><a href="/java-learning/design-pattern/builder.html#总结" class="sidebar-link">总结</a></li><li class="sidebar-sub-header"><a href="/java-learning/design-pattern/builder.html#参考资料" class="sidebar-link">参考资料</a></li></ul></li></ul></section></li><li><a href="/java-learning/materials/" class="sidebar-link">相关资料</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="创建型-建造者模式"><a href="#创建型-建造者模式" class="header-anchor">#</a> 创建型-建造者模式</h1> <h2 id="定义"><a href="#定义" class="header-anchor">#</a> 定义</h2> <p>指将一个复杂对象的构造与它的表示分离，使同样的构建过程可以创建不同的表示，这样的设计模式被称为建造者模式。它是将一个复杂的对象分解为多个简单的对象，然后一步一步构建而成。它将变与不变相分离，即产品的组成部分是不变的，但每一部分是可以灵活选择的。</p> <h2 id="理解"><a href="#理解" class="header-anchor">#</a> 理解</h2> <p>建造者模式是一个用来建造一些构成比较复杂，构成成分较多且其中一些成分可以自由组合成，导致构建结果呈现出不同状态结果的模式。就比如建造房子，房子建造的流程都差不多，都是先打地基，然后建房子，后面要不要精装修，怎么精装修等，有很多的不同的组合可以选择。再然后比如计算机攒机，基础都一样，要有显示器、主板、cpu等等，但是你可以自由选择加几个内存条，装几块硬盘等。这个复杂的构建过程我们可以通过封装，来将建造过程屏蔽掉，使用者直接获取即可。</p> <h2 id="优点"><a href="#优点" class="header-anchor">#</a> 优点</h2> <ul><li>客户端不必知道产品内部组成的细节，将产品本身与产品的创建过程解耦，使得相同的创建过程可以创建不同的产品对象</li> <li>每一个具体建造者都相对独立，与其他的具体建造者无关，因此可以很方便地替换具体建造者或增加新的具体建造者，扩展方便，符合开闭原则</li> <li>可以更加精细地控制产品的创建过程</li></ul> <h2 id="缺点"><a href="#缺点" class="header-anchor">#</a> 缺点</h2> <ul><li>建造者模式所创建的产品一般具有较多的共同点，其组成部分相似，如果产品之间的差异性很大，不适合使用建造者模式，因此其使用范围受到一定的限制</li> <li>如果产品的内部变化复杂，可能会需要定义很多具体建造者类来实现这种变化，导致系统变得很庞大，增加了系统的理解难度和运行成本</li></ul> <h2 id="示例"><a href="#示例" class="header-anchor">#</a> 示例</h2> <p>模式构成主要成员：</p> <p>产品（Product）：它是包含多个组成部件的复杂对象，由具体建造者来创建其各个零部件</p> <p>抽象建造者（Builder）：它是一个包含创建产品各个子部件的抽象方法的接口，通常还包含一个返回复杂产品的方法 getResult()</p> <p>具体建造者(Concrete Builder）：实现 Builder 接口，完成复杂产品的各个部件的具体创建方法</p> <p>指挥者（Director）：它调用建造者对象中的部件构造与装配方法完成复杂对象的创建，在指挥者中不涉及具体产品的信息</p> <blockquote><p>以下简单模拟房屋建造来示例建造者模式</p></blockquote> <ol><li>构建产品类</li></ol> <div class="language-JAVA extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Data</span>
+<span class="token keyword">class</span> <span class="token class-name">House</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">// 地基</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> foundation<span class="token punctuation">;</span>
+    <span class="token comment">// 楼层</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> floor<span class="token punctuation">;</span>
+    <span class="token comment">// 装修</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> decoration<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="2"><li>构建抽象建造者</li></ol> <div class="language-JAVA extra-class"><pre class="language-java"><code><span class="token keyword">interface</span> <span class="token class-name">HouseBuilder</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">// 打地基</span>
+    <span class="token class-name">HouseBuilder</span> <span class="token function">buildFoundation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 建楼</span>
+    <span class="token class-name">HouseBuilder</span> <span class="token function">buildFloor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 装修</span>
+    <span class="token class-name">HouseBuilder</span> <span class="token function">decoration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 提房</span>
+    <span class="token class-name">House</span> <span class="token function">getHouse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="3"><li>实现具体建造者</li></ol> <div class="language-JAVA extra-class"><pre class="language-java"><code><span class="token keyword">class</span> <span class="token class-name">NormalHouseBuilder</span> <span class="token keyword">implements</span> <span class="token class-name">HouseBuilder</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> <span class="token class-name">House</span> house<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">NormalHouseBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>house <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">House</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">HouseBuilder</span> <span class="token function">buildFoundation</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        house<span class="token punctuation">.</span><span class="token function">setFoundation</span><span class="token punctuation">(</span><span class="token string">&quot;好地基&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">HouseBuilder</span> <span class="token function">buildFloor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        house<span class="token punctuation">.</span><span class="token function">setFloor</span><span class="token punctuation">(</span><span class="token string">&quot;建一层小楼&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">HouseBuilder</span> <span class="token function">decoration</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        house<span class="token punctuation">.</span><span class="token function">setDecoration</span><span class="token punctuation">(</span><span class="token string">&quot;普通装修&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">House</span> <span class="token function">getHouse</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> house<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="4"><li>实现指挥者</li></ol> <div class="language-JAVA extra-class"><pre class="language-java"><code><span class="token keyword">class</span> <span class="token class-name">Contractor</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> <span class="token class-name">HouseBuilder</span> houseBuilder<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">Contractor</span><span class="token punctuation">(</span><span class="token class-name">HouseBuilder</span> houseBuilder<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>houseBuilder <span class="token operator">=</span> houseBuilder<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * 精装修房子
+     *
+     * @return 房子
+     */</span>
+    <span class="token keyword">public</span> <span class="token class-name">House</span> <span class="token function">createHardcoverHouse</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>houseBuilder<span class="token punctuation">.</span><span class="token function">buildFoundation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">buildFloor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">decoration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getHouse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * 毛坯房子
+     *
+     * @return 房子
+     */</span>
+    <span class="token keyword">public</span> <span class="token class-name">House</span> <span class="token function">createBlankHouse</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>houseBuilder<span class="token punctuation">.</span><span class="token function">buildFoundation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">buildFloor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getHouse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="5"><li>测试方法</li></ol> <div class="language-JAVA extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 建筑工人按照包工头指挥怎么建造，是否需要装修</span>
+    <span class="token class-name">Contractor</span> contractor <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Contractor</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">NormalHouseBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 毛坯房</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>contractor<span class="token punctuation">.</span><span class="token function">createBlankHouse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 精装修房</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>contractor<span class="token punctuation">.</span><span class="token function">createHardcoverHouse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>测试结果：
+<img src="/java-learning/assets/img/builder-pattern.f4a1c7fb.jpg" alt="测试结果"></p> <blockquote><p>还有一种建造者模式是不需要指挥者，直接合并指挥者和具体建造者，这个是否省略得看具体的情况，如果你有不同的具体建造者类，做了不同的实现，但是生成某个最终产品的流程是一致的，这个时候就不适合省略建造者。指挥者存在目的还是在于通过同一个抽象建造者，依据既定的流程建造指定产品，不需要管内部到底具体用的什么具体建造者实现类，直接能够按照传入的实现类不同生产出不同的产品。</p></blockquote> <h2 id="总结"><a href="#总结" class="header-anchor">#</a> 总结</h2> <p>建造者模式可以帮助我们屏蔽掉复杂的对象构建过程，维护对象的构建只需在特定的类中维护即可，拓展也方便，使用的时候完全不需要管是如何实现的，低耦合，在特定的场景中还是非常好用的。</p> <h2 id="参考资料"><a href="#参考资料" class="header-anchor">#</a> 参考资料</h2> <ol><li><a href="https://www.jianshu.com/p/47329a94f5dc" target="_blank" rel="noopener noreferrer">Java 设计模式——建造者模式（Builder Pattern）<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li><a href="http://c.biancheng.net/view/1354.html" target="_blank" rel="noopener noreferrer">建造者模式（Bulider模式）详解<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li><a href="https://blog.csdn.net/yitian_z/article/details/103107540" target="_blank" rel="noopener noreferrer">设计模式之：建造者模式<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ol></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/java-learning/design-pattern/state.html" class="prev">
+        行为型-状态模式
+      </a></span> <span class="next"><a href="/java-learning/materials/">
+        相关资料
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/java-learning/assets/js/app.cecf43fa.js" defer></script><script src="/java-learning/assets/js/2.461ce9dd.js" defer></script><script src="/java-learning/assets/js/8.9beb684b.js" defer></script>
+  </body>
+</html>
