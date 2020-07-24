@@ -34,6 +34,22 @@ module.exports = {
         ]
       },
       {
+        title: 'JVM',
+        collapsable: true,
+        path: '/jvm/',
+        children: [
+          'waiting'
+        ]
+      },
+      {
+        title: '多线程',
+        collapsable: true,
+        path: '/multi-thread/',
+        children: [
+          './multi-thread/basis'
+        ]
+      },
+      {
         title: '设计模式',
         collapsable: true,
         path: '/design-pattern/',
