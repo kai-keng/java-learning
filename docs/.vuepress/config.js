@@ -58,6 +58,7 @@ module.exports = {
           './design-pattern/templateMethod',
           './design-pattern/state',
           './design-pattern/builder',
+          './design-pattern/prototype',
         ]
       },
       {
