@@ -46,7 +46,8 @@ module.exports = {
         collapsable: true,
         path: '/multi-thread/',
         children: [
-          './multi-thread/basis'
+          './multi-thread/basis',
+          './multi-thread/principle',
         ]
       },
       {
