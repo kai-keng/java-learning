@@ -29,17 +29,24 @@ module.exports = {
         title: 'Spring Cloud',
         collapsable: true,
         path: '/spring-cloud/',
+      },
+      {
+        title: 'MySQL',
+        collapsable: true,
+        path: '/mysql/',
         children: [
-          'waiting'
+          './mysql/mysql-index',
         ]
+      },
+      {
+        title: '集合框架',
+        collapsable: true,
+        path: '/collection/',
       },
       {
         title: 'JVM',
         collapsable: true,
         path: '/jvm/',
-        children: [
-          'waiting'
-        ]
       },
       {
         title: '多线程',
@@ -61,6 +68,11 @@ module.exports = {
           './design-pattern/builder',
           './design-pattern/prototype',
         ]
+      },
+      {
+        title: '网络',
+        collapsable: true,
+        path: '/internet/',
       },
       {
         title: '相关资料',

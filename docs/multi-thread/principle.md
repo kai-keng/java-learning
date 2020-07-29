@@ -209,6 +209,149 @@ Java在`java.util.concurrent.atomic`包下提供了很多原子性操作的类�
   1. 使用JDK 1.5开始就提供的AtomicReference类保证对象之间的原子性，把多个变量放到一个对象里面进行CAS操作
   2. 使用锁。锁内的临界区代码可以保证只有当前线程能操作
 
+
+## AQS
+
+### 定义
+AQS即抽象队列同步器，指抽象的实现了一些必要的核心方法，其他方法由子类实现的一个队列存储的同步器，使用AQS可以很简单的构建一个同步器。
+
+### 原理
+AQS中保存了一个使用volatile修饰的state变量，用来表示当前获取到资源的状态，还有一个保存当前加锁线程的变量，还有一个先进先出的队列，用来保存加锁失败的等待队列。加锁流程如下：
+
+1. state变量初始值为0，线程1使用CAS尝试修改state变量，若成功则修改state为1，设置加锁线程为线程1
+2. 线程2尝试加锁，使用CAS修改state，但state不为0，修改失败，使用CAS将自己写入等待队列，写入成功后进入阻塞
+3. 线程1释放锁，将state从1改为0，并设置加锁线程为null，并唤醒等待队列的头部线程2
+4. 线程2尝试加锁，重复线程1的步骤
+
+AQS资源共享还分为独占模式和共享模式：
+* 独占模式（Exclusive）：资源是独占的，一次只能一个线程获取。如ReentrantLock。
+* 共享模式（Share）：同时可以被多个线程获取，具体的资源个数可以通过参数指定。如Semaphore/CountDownLatch。
+
+### AQS相关实现
+#### Semaphore 信号量
+信号量是一个允许多个线程同时获取资源的共享式锁，在初始化的时候就定义信号总数，在需要加锁的地方申请信号量，如果拿到了则获取资源，在使用完了以后可以释放资源，供其他线程获取
+```JAVA
+public class SemaphoreExample1 {
+  // 请求的数量
+  private static final int threadCount = 550;
+
+  public static void main(String[] args) throws InterruptedException {
+    // 创建一个具有固定线程数量的线程池对象（如果这里线程池的线程数量给太少的话你会发现执行的很慢）
+    ExecutorService threadPool = Executors.newFixedThreadPool(300);
+    // 一次只能允许执行的线程数量。
+    final Semaphore semaphore = new Semaphore(20);
+
+    for (int i = 0; i < threadCount; i++) {
+      final int threadnum = i;
+      threadPool.execute(() -> {// Lambda 表达式的运用
+        try {
+          semaphore.acquire();// 获取一个许可，所以可运行线程数量为20/1=20
+          test(threadnum);
+          semaphore.release();// 释放一个许可
+        } catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+
+      });
+    }
+    threadPool.shutdown();
+    System.out.println("finish");
+  }
+
+  public static void test(int threadnum) throws InterruptedException {
+    Thread.sleep(1000);// 模拟请求的耗时操作
+    System.out.println("threadnum:" + threadnum);
+    Thread.sleep(1000);// 模拟请求的耗时操作
+  }
+}
+```
+
+#### CountDownLatch （倒计时器）
+CountDownLatch是用于指定的当多个线程都完成任务以后，才可以获取到倒计时器锁住的资源。在初始化的时候定义需要等待的线程数量，然后每个线程执行完毕以后调用`countDown`方法，计数器就会减一，直至减至0，则锁释放。
+```JAVA
+public class CountDownLatchExample1 {
+  // 请求的数量
+  private static final int threadCount = 550;
+
+  public static void main(String[] args) throws InterruptedException {
+    // 创建一个具有固定线程数量的线程池对象（如果这里线程池的线程数量给太少的话你会发现执行的很慢）
+    ExecutorService threadPool = Executors.newFixedThreadPool(300);
+    final CountDownLatch countDownLatch = new CountDownLatch(threadCount);
+    for (int i = 0; i < threadCount; i++) {
+      final int threadnum = i;
+      threadPool.execute(() -> {// Lambda 表达式的运用
+        try {
+          test(threadnum);
+        } catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        } finally {
+          countDownLatch.countDown();// 表示一个请求已经被完成
+        }
+
+      });
+    }
+    countDownLatch.await();
+    threadPool.shutdown();
+    System.out.println("finish");
+  }
+
+  public static void test(int threadnum) throws InterruptedException {
+    Thread.sleep(1000);// 模拟请求的耗时操作
+    System.out.println("threadnum:" + threadnum);
+    Thread.sleep(1000);// 模拟请求的耗时操作
+  }
+}
+```
+#### CyclicBarrier(循环栅栏)
+CyclicBarrier和CountDownLatch有些相似，循环栅栏也是定义等待的线程数，当与指定的线程数相等的线程到达以后，锁开，允许执行，然后会重置栅栏，继续等待下次线程冲开栅栏。
+```JAVA
+public class CyclicBarrierExample2 {
+  // 请求的数量
+  private static final int threadCount = 550;
+  // 需要同步的线程数量
+  private static final CyclicBarrier cyclicBarrier = new CyclicBarrier(5);
+
+  public static void main(String[] args) throws InterruptedException {
+    // 创建线程池
+    ExecutorService threadPool = Executors.newFixedThreadPool(10);
+
+    for (int i = 0; i < threadCount; i++) {
+      final int threadNum = i;
+      Thread.sleep(1000);
+      threadPool.execute(() -> {
+        try {
+          test(threadNum);
+        } catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        } catch (BrokenBarrierException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+      });
+    }
+    threadPool.shutdown();
+  }
+
+  public static void test(int threadnum) throws InterruptedException, BrokenBarrierException {
+    System.out.println("threadnum:" + threadnum + "is ready");
+    try {
+      /**等待60秒，保证子线程完全执行结束*/
+      cyclicBarrier.await(60, TimeUnit.SECONDS);
+    } catch (Exception e) {
+      System.out.println("-----CyclicBarrierException------");
+    }
+    System.out.println("threadnum:" + threadnum + "is finish");
+  }
+
+}
+```
+
+### CyclicBarrier与CountDownLatch的区别
+CountDownLatch中的计数器是递减且不会重置的，核心在于其他线程完成了countDown以后可以继续执行自己的其他任务，也可以结束，而CyclicBarrier的核心在于所有的线程执行到我等待的地方的时候，都必须等待着，只要有一个线程未执行完毕，你都得等待着，直到全部线程都执行完毕，然后统一通过
+
 ## 参考资料
 1. [Java多线程原理篇](http://concurrent.redspider.group/article/02/6.html)
 2. [让你彻底理解volatile](https://www.jianshu.com/p/157279e6efdb)
