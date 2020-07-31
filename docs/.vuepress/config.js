@@ -55,6 +55,7 @@ module.exports = {
         children: [
           './multi-thread/basis',
           './multi-thread/principle',
+          './multi-thread/thread-util',
         ]
       },
       {
@@ -67,6 +68,7 @@ module.exports = {
           './design-pattern/state',
           './design-pattern/builder',
           './design-pattern/prototype',
+          './design-pattern/flyweight',
         ]
       },
       {

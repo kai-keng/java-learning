@@ -6,6 +6,7 @@
 5. [Java面试突击](https://apppukyptrl1086.pc.xiaoe-tech.com/detail/p_5d3114935b4d7_CEcL8yMS/6)
 6. [力扣](https://leetcode-cn.com/)--刷题，🆙🆙🆙
 7. [阿里巴巴Java开发手册](https://kangroo.gitee.io/ajcg/#/table-index)
+8. [MySQL数据库面试题（2020最新版）](https://blog.csdn.net/ThinkWon/article/details/104778621)
 
 
 学无止境，学习不易，忘我能坚持学完👆，加油🆙！
