@@ -45,7 +45,7 @@ spring.data.mongodb.test2.database=test2
 
 这些路径的配置文件优先级从上至下越来越低，如果出现重复的配置，则使用高优先级配置文件中的配置，且properties文件的配置优先级高于yml文件。
 
-![配置文件路径图](https://upload-images.jianshu.io/upload_images/13184578-31bb8d4c59d678b6.png?imageMogr2/auto-orient/strip|imageView2/2/w/478/format/webp)
+![配置文件路径图](../public/images/spring-boot/configuration.jpg)
 
 
 ## 自定义配置文件

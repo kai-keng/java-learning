@@ -36,6 +36,8 @@ module.exports = {
         path: '/mysql/',
         children: [
           './mysql/mysql-index',
+          './mysql/datatype',
+          './mysql/transaction',
         ]
       },
       {

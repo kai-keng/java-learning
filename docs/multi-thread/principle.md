@@ -229,7 +229,9 @@ AQS资源共享还分为独占模式和共享模式：
 
 ### AQS相关实现
 #### Semaphore 信号量
-信号量是一个允许多个线程同时获取资源的共享式锁，在初始化的时候就定义信号总数，在需要加锁的地方申请信号量，如果拿到了则获取资源，在使用完了以后可以释放资源，供其他线程获取
+信号量是一个允许多个线程同时获取资源的共享式锁，在初始化的时候就定义信号总数，在需要加锁的地方申请信号量，如果拿到了则获取资源，在使用完了以后可以释放资源，供其他线程获取。
+
+Semaphore默认的acquire方法是会让线程进入等待队列，且会抛出中断异常。但它还有一些方法可以忽略中断或不进入阻塞队列。
 ```JAVA
 public class SemaphoreExample1 {
   // 请求的数量
@@ -304,6 +306,14 @@ public class CountDownLatchExample1 {
   }
 }
 ```
+
+如果在参与者（线程）在等待的过程中，Barrier被破坏，就会抛出BrokenBarrierException。可以用isBroken()方法检测Barrier是否被破坏。
+
+* 如果有线程已经处于等待状态，调用reset方法会导致已经在等待的线程出现BrokenBarrierException异常。并且由于出现了BrokenBarrierException，将会导致始终无法等待。
+* 如果在等待的过程中，线程被中断，也会抛出BrokenBarrierException异常，并且这个异常会传播到其他所有的线程。
+* 如果在执行屏障操作过程中发生异常，则该异常将传播到当前线程中，其他线程会抛出BrokenBarrierException，屏障被损坏。
+* 如果超出指定的等待时间，当前线程会抛出 TimeoutException 异常，其他线程会抛出BrokenBarrierException异常。
+
 #### CyclicBarrier(循环栅栏)
 CyclicBarrier和CountDownLatch有些相似，循环栅栏也是定义等待的线程数，当与指定的线程数相等的线程到达以后，锁开，允许执行，然后会重置栅栏，继续等待下次线程冲开栅栏。
 ```JAVA
