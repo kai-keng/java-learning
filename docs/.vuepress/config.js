@@ -49,6 +49,12 @@ module.exports = {
         title: 'JVM',
         collapsable: true,
         path: '/jvm/',
+        children: [
+          './jvm/runtime-data-area',
+          './jvm/run-java',
+          './jvm/class-loader',
+          './jvm/gc',
+        ]
       },
       {
         title: '多线程',
