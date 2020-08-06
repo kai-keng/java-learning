@@ -2,9 +2,9 @@
 类加载器是JVM必不可少的一个部分，它负责将编译好的class文件加载到JVM虚拟机内部运行时数据区的方法区中来，供程序使用。ClassLoader只负责class文件的加载，而是否能够运行则由 Execution Engine 来决定。
 
 ## 类加载流程
-类加载器加载流程一共有3个步骤，分别是：加载，链接，初始化。其中连接又分为验证，准备，解析三个步骤。
+类加载器加载流程一共有3个步骤，分别是：加载，链接，初始化。其中链接又分为验证，准备，解析三个步骤。
 
-* 加载: 第一步加载共分为3个步骤。
+* 加载:
   1. 将class文件加载到内存
   2. 将静态的数据结构转换成方法区中的运行时数据结构
   3. 在堆中生成一个java.lang.Class类对象来代表这个类，作为访问类信息数据的入口
@@ -17,7 +17,7 @@
 * 初始化：初始化其实就是一个赋值的操作，它会执行一个类构造器的`<clinit>()`方法。由编译器自动收集类中所有变量的赋值动作，此时准备阶段时的那个`static int a = 3`的例子，在这个时候就正式赋值为3。
 
 ## 类何时被初始化
-上面介绍了类的加载流程，那么类上面时候才会被初始化呢？就是以下6种情况：
+上面介绍了类的加载流程，那么类什么时候才会被初始化呢？就是以下6种情况：
 
 * 创建类的实例，new对象的时候。
 * 访问类或者接口的静态变量，或者对类的静态变量赋值
@@ -28,8 +28,8 @@
 
 ## 多个类加载器的类加载顺序
 当有多个类加载器时，每个类只能被一个类加载器初始化一次，不同的类加载器也是有优先级的，有如下加载器：
-1. **BootStrap ClassLoader**：负责加载$JAVA_HOME中jre/lib/rt.jar里所有的class，由C++实现，不是ClassLoader子类。
-2. **Extension ClassLoader**：负责加载java平台中扩展功能的一些jar包，包括$JAVA_HOME中jre/lib/*.jar或-Djava.ext.dirs指定目录下的jar包。
+1. **BootStrap ClassLoader**：负责加载`$JAVA_HOME`中`jre/lib/rt.jar`里所有的class，由C++实现，不是ClassLoader子类。
+2. **Extension ClassLoader**：负责加载java平台中扩展功能的一些jar包，包括`$JAVA_HOME`中`jre/lib/*.jar`或`-Djava.ext.dirs`指定目录下的jar包。
 3. **App ClassLoader**：负责加载classpath中指定的jar包及目录中class。
 4. **Custom ClassLoader**：属于应用程序根据自身需要自定义的ClassLoader，如tomcat、jboss都会根据j2ee规范自行实现ClassLoader。
 
