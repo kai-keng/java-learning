@@ -77,6 +77,7 @@ module.exports = {
           './design-pattern/builder',
           './design-pattern/prototype',
           './design-pattern/flyweight',
+          './design-pattern/proxy',
         ]
       },
       {
