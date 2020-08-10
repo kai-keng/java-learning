@@ -44,6 +44,13 @@ module.exports = {
         title: '集合框架',
         collapsable: true,
         path: '/collection/',
+        children: [
+          './collection/overview',
+          './collection/list',
+          './collection/set',
+          './collection/map',
+          './collection/others',
+        ]
       },
       {
         title: 'JVM',
