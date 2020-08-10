@@ -49,6 +49,7 @@ module.exports = {
           './collection/list',
           './collection/set',
           './collection/map',
+          './collection/queue',
           './collection/others',
         ]
       },
