@@ -138,7 +138,7 @@ drop PRIMARY KEY
 
 实操的难度在于前缀截取的长度。
 
-我们可以利用`select count(*)/count(distinct left(password,prefixLen));`，通过从调整prefixLen的值（从1自增）查看不同前缀长度的一个平均匹配度，接近1时就可以了（表示一个密码的前prefixLen个字符几乎能确定唯一一条记录）
+我们可以利用`select count(*)/count(distinct left(password,prefixLen)) from table;`，通过从调整prefixLen的值（从1自增）查看不同前缀长度的一个平均匹配度，接近1时就可以了（表示一个密码的前prefixLen个字符几乎能确定唯一一条记录）
 
 ## 什么是最左前缀原则？什么是最左匹配原则
 * 顾名思义，就是最左优先，在创建多列索引时，要根据业务需求，where子句中使用最频繁的一列放在最左边。

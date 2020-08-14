@@ -38,6 +38,7 @@ module.exports = {
           './mysql/mysql-index',
           './mysql/datatype',
           './mysql/transaction',
+          './mysql/explain',
         ]
       },
       {
