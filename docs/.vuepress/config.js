@@ -23,6 +23,7 @@ module.exports = {
           './spring-boot/11-mybatis-auto',
           './spring-boot/12-common-result',
           './spring-boot/13-knife4j',
+          './spring-boot/14-transactional',
         ]
       },
       {
@@ -39,6 +40,7 @@ module.exports = {
           './mysql/datatype',
           './mysql/transaction',
           './mysql/explain',
+          './mysql/sql-optimization',
         ]
       },
       {
@@ -87,6 +89,14 @@ module.exports = {
           './design-pattern/prototype',
           './design-pattern/flyweight',
           './design-pattern/proxy',
+          './design-pattern/observer',
+          './design-pattern/factory',
+          './design-pattern/strategy',
+          './design-pattern/adapter',
+          './design-pattern/command',
+          './design-pattern/decorator',
+          './design-pattern/facade',
+          './design-pattern/bridge',
         ]
       },
       {
