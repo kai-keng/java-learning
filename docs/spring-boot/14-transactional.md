@@ -19,6 +19,34 @@ public int add(Student student) {
 
 如上加上 `Transactional` 事务即被开启，当方法结束的时候会自动提交事务。我们一般在 Service 层添加事务，便于确保多个 DB 操作一起成功或失败。
 
+## 手动开启事务
+有时候我们的业务中可能需要根据业务逻辑来手动的控制事务的提交与回滚，这个时候就不能依赖原有的自动提交事务与异常回滚了，我们可以通过以下方式手动控制事务：
+
+```JAVA
+@Autowired
+DataSourceTransactionManager transactionManager;
+
+@Autowired
+TransactionDefinition transactionDefinition;
+
+@Transactional
+public void testTransactional() {
+    // 开启事务
+    TransactionStatus status = transactionManager.getTransaction(transactionDefinition);
+
+    try {
+        Student student = Student.builder().sno("010").name("Borg").sex("M").build();
+        studentService.add(student);
+
+        // 提交事务
+        transactionManager.commit(status);
+    } catch (Exception ex) {
+        // 回滚事务
+        transactionManager.rollback(status);
+    }
+}
+```
+
 ## 多数据源事务配置
 在配置了多数据源的情况下，我们需要对不同的数据源指定不同的事务管理器。
 
@@ -88,6 +116,21 @@ public int add(Student student) {
 ```
 
 > 切记，只有错误向上层抛出的时候才能触发错误回滚。如果你在方法中使用 `try catch` 将异常给捕捉了，并没有继续向上层抛出的话，则不会触发错误回滚。
+
+
+## 事务超时
+我们的事务可以主动设置事务超时时间，如下：
+
+```JAVA
+// 设置超时时间5s，单位为秒
+@Transactional(timeout = 5)
+public void testTransactional() {
+    Student student = Student.builder().sno("008").name("Borg").sex("M").build();
+    studentService.add(student);
+}
+```
+
+但是这个事务的超时时间指的并不是在开启事务的方法中执行的超时时长，其超时时间指的是 MyBatis 中的 SQL 执行的时间，如果 SQL 执行时间超过设置的超时时间则会抛出异常并回滚事务，否则方法中执行时间超出超时时间是不会回滚的。
 
 ## 在单元测试中的应用
 我们在写单元测试的时候，往往希望在测试执行完成以后回滚测试过程中添加、修改或删除的数据，保持原样。这个时候就可以使用 `Transactional` 注解，在测试类上加上 `Transactional` 注解，可以让整个单元测试类中的方法在执行完成以后都回滚事务，如下：

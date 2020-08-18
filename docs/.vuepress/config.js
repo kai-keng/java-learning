@@ -97,6 +97,7 @@ module.exports = {
           './design-pattern/decorator',
           './design-pattern/facade',
           './design-pattern/bridge',
+          './design-pattern/responsibility',
         ]
       },
       {
