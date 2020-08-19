@@ -106,6 +106,14 @@ module.exports = {
         path: '/internet/',
       },
       {
+        title: '其他',
+        collapsable: true,
+        path: '/other/',
+        children: [
+          './other/java8',
+        ]
+      },
+      {
         title: '相关资料',
         collapsable: true,
         path: '/materials/',
