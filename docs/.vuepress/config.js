@@ -10,6 +10,7 @@ module.exports = {
       {
         title: 'Spring Boot',
         collapsable: true,
+        sidebarDepth: 2,
         path: '/spring-boot/',
         children: [
           './spring-boot/0-idea-configuration',
@@ -29,11 +30,13 @@ module.exports = {
       {
         title: 'Spring Cloud',
         collapsable: true,
+        sidebarDepth: 2,
         path: '/spring-cloud/',
       },
       {
         title: 'MySQL',
         collapsable: true,
+        sidebarDepth: 2,
         path: '/mysql/',
         children: [
           './mysql/mysql-index',
@@ -46,6 +49,7 @@ module.exports = {
       {
         title: '集合框架',
         collapsable: true,
+        sidebarDepth: 2,
         path: '/collection/',
         children: [
           './collection/overview',
@@ -59,6 +63,7 @@ module.exports = {
       {
         title: 'JVM',
         collapsable: true,
+        sidebarDepth: 2,
         path: '/jvm/',
         children: [
           './jvm/runtime-data-area',
@@ -70,6 +75,7 @@ module.exports = {
       {
         title: '多线程',
         collapsable: true,
+        sidebarDepth: 2,
         path: '/multi-thread/',
         children: [
           './multi-thread/basis',
@@ -80,6 +86,7 @@ module.exports = {
       {
         title: '设计模式',
         collapsable: true,
+        sidebarDepth: 2,
         path: '/design-pattern/',
         children: [
           './design-pattern/singleton',
@@ -103,16 +110,27 @@ module.exports = {
       {
         title: '网络',
         collapsable: true,
+        sidebarDepth: 2,
         path: '/internet/',
       },
       {
         title: '其他',
         collapsable: true,
+        sidebarDepth: 2,
         path: '/other/',
         children: [
           './other/java8',
         ]
       },
+      // {
+      //   title: '阿里Java开发手册',
+      //   collapsable: true,
+      //   sidebarDepth: 2,
+      //   path: '/ali/',
+      //   children: [
+      //     './ali/programming-protocol',
+      //   ]
+      // },
       {
         title: '相关资料',
         collapsable: true,
