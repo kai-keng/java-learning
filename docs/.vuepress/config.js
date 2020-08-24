@@ -120,6 +120,7 @@ module.exports = {
         path: '/other/',
         children: [
           './other/java8',
+          './other/distributed-lock',
         ]
       },
       // {
