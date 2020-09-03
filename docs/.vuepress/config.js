@@ -25,6 +25,7 @@ module.exports = {
           './spring-boot/12-common-result',
           './spring-boot/13-knife4j',
           './spring-boot/14-transactional',
+          './spring-boot/15-mybatis-plus',
         ]
       },
       {

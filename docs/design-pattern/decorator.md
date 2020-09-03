@@ -13,7 +13,7 @@
 
 
 ## 实现
-```
+```JAVA
     interface Car {
         void run();
     }
