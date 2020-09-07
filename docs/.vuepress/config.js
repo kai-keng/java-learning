@@ -26,6 +26,7 @@ module.exports = {
           './spring-boot/13-knife4j',
           './spring-boot/14-transactional',
           './spring-boot/15-mybatis-plus',
+          './spring-boot/16-dubbo',
         ]
       },
       {
