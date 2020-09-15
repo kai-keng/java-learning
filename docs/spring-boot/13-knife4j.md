@@ -12,14 +12,21 @@ knife4j是为Java MVC框架集成Swagger生成Api文档的增强解决方案,有
     <artifactId>knife4j-spring-boot-starter</artifactId>
     <version>2.0.4</version>
 </dependency>
-<!-- 避免版本冲突 -->
-<dependency>
-    <groupId>com.google.guava</groupId>
-    <artifactId>guava</artifactId>
-    <version>29.0-jre</version>
-</dependency>
+<!--        &lt;!&ndash; 避免版本冲突 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.google.guava</groupId>-->
+<!--            <artifactId>guava</artifactId>-->
+<!--            <version>29.0-jre</version>-->
+<!--        </dependency>-->
+  <!-- 解决 Failed to start bean 'documentationPluginsBootstrapper'; 问题 -->
+  <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+  </dependency>
 ```
 > 注：knife4j集成到Spring Boot 2.3.x版本启动时会抛出异常，需要指定`guava`包版本为最高的**29.0-jre**，解决包版本冲突问题以后即可
+
+> 2020-09-15 更新：在使用的时候遇到了异常 **org.springframework.context.ApplicationContextException: Failed to start bean 'documentationPluginsBootstrapper';**，如上指定 guava 版本并没有解决问题，在手动引入了包 **spring-boot-starter-validation** 以后，问题就解决了，所以更新以上引入，去掉 guava 包，引入 **spring-boot-starter-validation**。
 
 2. 添加knife4j配置类
 ```JAVA
