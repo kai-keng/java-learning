@@ -142,13 +142,18 @@ public class TestConfigBean {
 Spring中默认支持不同环境使用不同配置文件，我们可以以*application-{profile}.yml*的格式命名，建立多个profile配置文件，比如application-dev.yml、application-prod.yml，分别对应测试环境和生产环境，然后我们可以在application.yml文件中定义`spring.profiles.active`配置，这个变量的值等于dev即表示加载application-dev.yml配置文件，通过改变该变配置值来选择不同的环境。
 > 实际运用中，我们不可能通过更改application.yml文件中的`spring.profiles.active`配置来更换环境，有另一种做法则是在用java命令运行的时候指定`spring.profiles.active`变量的值来选择配置：*java -jar xxx.jar --spring.profiles.active={profile}*
 
+## 使用 jar 包外的配置文件（实用）
+在生产中，我们有时候需要外挂配置文件，便于修改一些配置而不需要重新去改代码并打包，那么如何让程序读取到外部的配置文件呢？
 
+我使用的方法是在使用 java -jar xxx.jar 启动的时候添加额外的参数 **-Dspring.config.location=/usr/src/app/config/application.yml** 来指定外挂配置的位置，并优先使用这个外挂配置，详见[参考资料3](#参考资料)。
+ 
 # 总结
 实际运用中，我们可以使用application.yml文件来放置*基础配置*，然后创建不同的profile配置文件来放置不同环境的配置，启动的时候修改`spring.profiles.active`变量来达到不同环境不同配置文件的目的。实际生产中我并没有使用这种方式，因为生产使用的是微服务的方式，使用Rancher平台维护服务，我们默认在*src/main/resources*路径下放置本地测试配置文件，在部署的时候通过*configMap*的方式将配置文件在部署的时候写入*src/main/resources/config*路径下，使用配置优先级来让程序优先使用config路径下的配置文件。同时不同环境有不同的Rancher平台，可以在不同平台分别写入不同的配置，所以情况不同可以依据情况来灵活改变。
 
 # 参考资料
 1. [SpringBoot配置文件——加载顺序](https://www.jianshu.com/p/3c615bd42799)
 2. [Spring Boot一些基础配置](https://mrbird.cc/Spring-Boot%20basic%20config.html)
+3. [SpringBoot 项目打成 jar 包后关于配置文件的外部化配置](https://blog.csdn.net/Dh_Chao/article/details/78663365?utm_medium=distribute.pc_relevant.none-task-blog-title-7&spm=1001.2101.3001.4242)
 
 <!-- ## END
 **作者**: Borg

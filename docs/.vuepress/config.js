@@ -123,6 +123,8 @@ module.exports = {
         children: [
           './other/java8',
           './other/distributed-lock',
+          './other/excel',
+          './other/package',
         ]
       },
       // {
