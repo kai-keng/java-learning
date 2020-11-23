@@ -264,6 +264,36 @@ hash索引基于哈希表实现，进行查找时，调用一次hash函数就可
 * hash索引任何时候都避免不了回表查询数据，而B+树在符合某些条件(聚簇索引，覆盖索引等)的时候可以只通过索引完成查询。
 * hash索引虽然在等值查询上较快，但是不稳定。性能不可预测，当某个键值存在大量重复的时候，发生hash碰撞，此时效率可能极差。
 
+## 索引实践经验
+* 当索引列中列的最左列索引在查询时如果缺失的话，索引是不生效的，但是缺失后续的字段则不影响索引，且=和in查询可以更换字段位置
+  ![索引图](../public/images/mysql/index-exp-1.jpg)
+
+  > 索引生效查询语句
+  ```SQL
+  EXPLAIN select a.id, a.title, a.type, a.visible, a.created_time, a.topping_time 
+  from announce AS a
+  WHERE visible=true and type_flag = 'DA_JI_FF'
+  order by topping_time desc, sort_num asc, id desc
+  LIMIT 0, 10;
+  ```
+  ![索引生效分析结果图](../public/images/mysql/index-exp-2.jpg)
+
+  > 索引失效查询语句
+  ```SQL
+  EXPLAIN select a.id, a.title, a.type, a.visible, a.created_time, a.topping_time 
+  from announce AS a
+  WHERE  type_flag = 'DA_JI_FF'
+  order by topping_time desc, sort_num asc, id desc
+  LIMIT 0, 10;
+  ```
+  ![索引失效分析结果图](../public/images/mysql/index-exp-3.jpg)
+
+  > 若不添加 WHERE 添加语句的话，索引也不会生效，即使你是直接添加的排序字段的索引。
+  >
+  > 个人考虑认为可能是不添加 WHERE 的话需要全表排序，要查询全表，当查询的数据为全表的时候，索引即不生效。
+
+  > 总结：综上经验，若有确定不会同时使用的查询条件时，需要分开建立索引，不然必定无法生效，浪费索引。
+
 ## 参考资料
 1. [MySQL数据库面试题（2020最新版）](https://blog.csdn.net/ThinkWon/article/details/104778621)
 2. [玩转Mysql系列 - 第22篇：mysql索引原理详解](https://mp.weixin.qq.com/s?__biz=MzA5MTkxMDQ4MQ==&mid=2648933422&idx=1&sn=f28a92c195d914d636117c2316524c5e&chksm=88621c10bf159506af8a3c6b947e32b11414ff72ed3ad19a9fa0b0cec0be6c3ae3931117b3d2&token=498198732&lang=zh_CN)

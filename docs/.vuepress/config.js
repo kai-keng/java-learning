@@ -36,6 +36,17 @@ module.exports = {
         path: '/spring-cloud/',
       },
       {
+        title: 'Spring Security',
+        collapsable: true,
+        sidebarDepth: 2,
+        path: '/spring-security/',
+        children: [
+          './spring-security/1-login-start',
+          './spring-security/2-custom-login',
+          './spring-security/3-validate-code',
+        ]
+      },
+      {
         title: 'MySQL',
         collapsable: true,
         sidebarDepth: 2,
