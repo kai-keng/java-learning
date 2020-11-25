@@ -107,6 +107,62 @@ public class KaptchaConfig {
 }
 ```
 
+> 添加验证码对象类
+```JAVA
+package com.example.security.model;
+
+import lombok.Data;
+
+import java.awt.image.BufferedImage;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
+@Data
+public class Captcha implements Serializable {
+
+    private static final long serialVersionUID = -2921955681067719313L;
+
+    private static final int DEFAULT_EXPIRED = 60;
+
+    /**
+     * 有效时间，单位s
+     */
+    private Integer expireIn;
+
+    /**
+     * 验证码图片
+     */
+    private transient BufferedImage image;
+
+    /**
+     * 验证码代码
+     */
+    private String code;
+
+    /**
+     * 过期时间
+     */
+    private LocalDateTime expireTime;
+
+    public Captcha(String code, BufferedImage image, Integer expireIn) {
+        this.expireIn = expireIn == null ? DEFAULT_EXPIRED : expireIn;
+        this.expireTime = LocalDateTime.now().plusSeconds(expireIn);
+        this.code = code;
+        this.image = image;
+    }
+
+    public Captcha(String code, BufferedImage image, LocalDateTime expireTime) {
+        this.expireTime = expireTime == null ? LocalDateTime.now().plusSeconds(DEFAULT_EXPIRED) : expireTime;
+        this.code = code;
+        this.image = image;
+    }
+
+    public boolean isExpire() {
+        return LocalDateTime.now().isAfter(this.expireTime);
+    }
+}
+```
+
 ## 3. 添加自定义验证码校验异常类
 ```JAVA
 package com.example.security.exception;
