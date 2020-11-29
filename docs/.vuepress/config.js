@@ -45,6 +45,7 @@ module.exports = {
           './spring-security/2-custom-login',
           './spring-security/3-validate-code',
           './spring-security/4-session',
+          './spring-security/5-permission',
         ]
       },
       {
