@@ -58,6 +58,7 @@ module.exports = {
           './mysql/transaction',
           './mysql/explain',
           './mysql/sql-optimization',
+          './mysql/fighting',
         ]
       },
       {
