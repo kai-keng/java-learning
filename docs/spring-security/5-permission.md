@@ -427,9 +427,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
                     @Override
                     public <O extends FilterSecurityInterceptor> O postProcess(O o) {
-                        //决策管理器
+                        // 决策管理器
                         o.setAccessDecisionManager(accessDecisionHandler);
-                        //安全元数据源
+                        //权 限数据源
                         o.setSecurityMetadataSource(securityMetadataSourceHandler);
                         return o;
                     }
@@ -480,3 +480,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 4. 将处理器添加入配置中
 
 完成以上步骤即整合了自定义的权限模块。
+
+## 推荐阅读
+1. [Springboot + Spring Security 实现前后端分离登录认证及权限控制](https://blog.csdn.net/I_am_Hutengfei/article/details/100561564)
+2. [spring security实现动态配置url权限的两种方法](https://www.cnblogs.com/xiaoqi/p/spring-security-rabc.html)
